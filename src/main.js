@@ -11,6 +11,11 @@ import ContactoC from './ContactoC.vue'
 import ContactoCP from './ContactoCP.vue'
 import Hello from './Hello.vue'
 
+import ElementUI from 'element-ui';
+//import 'element-ui/lib/theme-chalk/index.css';
+
+Vue.use(ElementUI);
+
 Vue.component('DataTable',DataTable);
 Vue.use(VueRouter);
 

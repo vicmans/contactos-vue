@@ -4,16 +4,8 @@
     <ul>
       <li><router-link :to="{name:'agregar'}">Agregar</router-link></li>
     </ul>
-    <ul v-if="contactos != null" id="contact-list">
-      <li v-for="contacto in contactos">
-        {{contacto.id}} - {{contacto.name}}
-        <br>
-        <router-link :to="{name: 'ver', params:{id: contacto.id}}"><button>Ver</button></router-link>
-        <router-link :to="{name: 'editar', params:{id: contacto.id}}"><button>Editar</button></router-link>
-        <button @click="borrar(contacto.id)">Borrar</button>
-      </li>
-    </ul>
-    <div v-else class="preloader-wrapper small active">
+
+    <div v-if="contactos == null" class="preloader-wrapper small active">
     <div class="spinner-layer spinner-green-only">
       <div class="circle-clipper left">
         <div class="circle"></div>
@@ -24,6 +16,44 @@
       </div>
     </div>
   </div>
+  <el-table v-else
+    :data="contactos"
+    style="width: 100%"
+    max-height="250">
+    <el-table-column
+      fixed
+      prop="id"
+      label="id"
+      width="150">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="Nombre"
+      width="120">
+    </el-table-column>
+    <el-table-column
+      prop="identification"
+      label="Identification"
+      width="120">
+    </el-table-column>
+
+    <el-table-column
+      label="Operaciones">
+      <template slot-scope="scope">
+        <router-link :to="{name: 'ver', params:{id: contactos[scope.$index].id}}"><el-button
+          size="mini">Ver</el-button></router-link>
+        <router-link :to="{name: 'editar', params:{id: contactos[scope.$index].id}}"><el-button
+          size="mini"
+          type="primary">Editar</el-button></router-link>
+        <el-button
+          size="mini"
+          type="danger"
+          @click="borrar(contactos[scope.$index].id)">Eliminar</el-button>
+      </template>
+    </el-table-column>
+    
+  </el-table>
+
   </div>
 </template>
 
@@ -44,6 +74,19 @@ export default {
     }
   },
   methods: {
+    handleEdit(index, row) {
+        console.log(index, row);
+      },
+      handleDelete(index, row) {
+        console.log(index, row);
+      },
+    deleteRow(index, rows) {
+      
+        id= rows[index].id;
+        console.log(id);
+        rows.splice(index, 1);
+        //borrar(id);
+      },
     borrar(id){
       var bo = confirm("Esta seguro de borrar");
       if (bo) {

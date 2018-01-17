@@ -24,6 +24,26 @@
       </div>
     </div>
   </div>
+
+  <el-table
+    :data="contactos"
+    stripe
+    style="width: 100%">
+    <el-table-column
+      prop="id"
+      label="id"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="Nombre"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="address"
+      label="Dirección">
+    </el-table-column>
+  </el-table>
   </div>
 </template>
 
