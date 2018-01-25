@@ -4,7 +4,8 @@
     <ul>
       <li><router-link :to="{name:'agregar'}">Agregar</router-link></li>
     </ul>
-
+    <el-container>
+    
     <div v-if="contactos == null" class="preloader-wrapper small active">
     <div class="spinner-layer spinner-green-only">
       <div class="circle-clipper left">
@@ -53,7 +54,7 @@
     </el-table-column>
     
   </el-table>
-
+  </el-container>
   </div>
 </template>
 
