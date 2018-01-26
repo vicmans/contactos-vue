@@ -4,46 +4,52 @@
     <ul>
       <li><router-link :to="{name:'agregar'}">Agregar</router-link></li>
     </ul>
-    <ul v-if="contactos != null" id="contact-list">
-      <li v-for="contacto in contactos">
-        {{contacto.id}} - {{contacto.name}}
-        <br>
-        <router-link :to="{name: 'ver', params:{id: contacto.id}}"><button>Ver</button></router-link>
-        <router-link :to="{name: 'editar', params:{id: contacto.id}}"><button>Editar</button></router-link>
-        <button @click="borrar(contacto.id)">Borrar</button>
-      </li>
-    </ul>
-    <div v-else class="preloader-wrapper small active">
-    <div class="spinner-layer spinner-green-only">
-      <div class="circle-clipper left">
-        <div class="circle"></div>
-      </div><div class="gap-patch">
-        <div class="circle"></div>
-      </div><div class="circle-clipper right">
-        <div class="circle"></div>
-      </div>
+    <el-row :justify="center">
+    <el-col :span="18" offset="3">
+      <br>
+    <div v-if="contactos == null" v-loading="true">
+    
     </div>
-  </div>
-
-  <el-table
+  
+  <el-table v-else
     :data="contactos"
-    stripe
-    style="width: 100%">
+    style="width: 100%"
+    max-height="250">
     <el-table-column
+      fixed
       prop="id"
       label="id"
-      width="180">
+      width="150">
     </el-table-column>
     <el-table-column
       prop="name"
       label="Nombre"
-      width="180">
+      width="120">
     </el-table-column>
     <el-table-column
-      prop="address"
-      label="Dirección">
+      prop="identification"
+      label="Identification"
+      width="120">
     </el-table-column>
+
+    <el-table-column
+      label="Operaciones">
+      <template slot-scope="scope">
+        <router-link :to="{name: 'ver', params:{id: contactos[scope.$index].id}}"><el-button
+          size="mini">Ver</el-button></router-link>
+        <router-link :to="{name: 'editar', params:{id: contactos[scope.$index].id}}"><el-button
+          size="mini"
+          type="primary">Editar</el-button></router-link>
+        <el-button
+          size="mini"
+          type="danger"
+          @click="borrar(contactos[scope.$index].id)">Eliminar</el-button>
+      </template>
+    </el-table-column>
+    
   </el-table>
+</el-col>
+  </el-row>
   </div>
 </template>
 

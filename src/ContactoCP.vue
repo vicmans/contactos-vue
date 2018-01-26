@@ -5,18 +5,14 @@
       <li><router-link :to="{name:'agregar'}">Agregar</router-link></li>
     </ul>
     <el-container>
+     <el-main>
+    <el-row :justify="center">
+    <el-col :span="18" offset="3">
+      <br>
+    <div v-if="contactos == null" v-loading="true">
     
-    <div v-if="contactos == null" class="preloader-wrapper small active">
-    <div class="spinner-layer spinner-green-only">
-      <div class="circle-clipper left">
-        <div class="circle"></div>
-      </div><div class="gap-patch">
-        <div class="circle"></div>
-      </div><div class="circle-clipper right">
-        <div class="circle"></div>
-      </div>
     </div>
-  </div>
+  
   <el-table v-else
     :data="contactos"
     style="width: 100%"
@@ -54,6 +50,9 @@
     </el-table-column>
     
   </el-table>
+</el-col>
+  </el-row>
+  </el-main>
   </el-container>
   </div>
 </template>

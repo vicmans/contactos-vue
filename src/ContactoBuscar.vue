@@ -4,19 +4,52 @@
     <ul>
       <li><router-link :to="{name:'agregar'}">Agregar</router-link></li>
     </ul>
-    <ul v-if="contactos != null" id="contact-list">
-      <li v-for="contacto in contactos">
-        {{contacto.id}} - {{contacto.name}}
-        <br>
-        <router-link :to="{name: 'ver', params:{id: contacto.id}}"><button>Ver</button></router-link>
-        <router-link :to="{name: 'editar', params:{id: contacto.id}}"><button>Editar</button></router-link>
-        <button @click="borrar(contacto.id)">Borrar</button>
-      </li>
-    </ul>
-  <div v-else class="progress">
+    <el-row :justify="center" v-if="contactos != null">
+      <el-col :span="16">
+      <el-table
+    :data="contactos"
+    style="width: 100%"
+    max-height="250">
+    <el-table-column
+      prop="id"
+      label="id"
+      width="150">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="Nombre"
+      width="120">
+    </el-table-column>
+    <el-table-column
+      prop="identification"
+      label="Identification"
+      width="120">
+    </el-table-column>
+
+    <el-table-column
+      label="Operaciones">
+      <template slot-scope="scope">
+        <router-link :to="{name: 'ver', params:{id: contactos[scope.$index].id}}"><el-button
+          size="mini">Ver</el-button></router-link>
+        <router-link :to="{name: 'editar', params:{id: contactos[scope.$index].id}}"><el-button
+          size="mini"
+          type="primary">Editar</el-button></router-link>
+        <el-button
+          size="mini"
+          type="danger"
+          @click="borrar(contactos[scope.$index].id)">Eliminar</el-button>
+      </template>
+    </el-table-column>
+  
+  </el-table>
+</el-col>
+    </el-row>
+  <el-row v-else class="progress" justify="center">
+     <el-col :span="6">
       <div class="indeterminate"></div>
-  </div>
-        
+    </el-col>
+  </el-row>
+  
     <!-- <pre>{{contactos}} </pre> -->
   </div>
 </template>

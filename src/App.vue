@@ -9,9 +9,9 @@
       <li><router-link to="/contactos/proveedores" @click="busca">Proveedores</router-link></li><li>
       <div class="row">
         <div class="col s6">
-        <input type="search" v-model="buscar" @keyup.enter="busca" placeholder="Buscar">
+        <el-input placeholder="Buscar" v-model="buscar" @keyup.enter="busca"></el-input>
         </div>
-        <button class="waves-effect waves-light btn" @click="busca">buscar</button>
+        <el-button @click="busca">Buscar</el-button>
         </div>
       </li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
