@@ -1,77 +1,92 @@
-<template>
-  <div id="app">
-   
-    <ul>
-      <li><img width="20" src="./assets/logo.png"></li>
-      <li><router-link to="/">Home</router-link></li>
-      <li><router-link to="/contactos">Contactos</router-link></li>
-      <li><router-link to="/contactos/clientes" @click="busca">Clientes</router-link></li>
-      <li><router-link to="/contactos/proveedores" @click="busca">Proveedores</router-link></li><li>
-      <div class="row">
-        <div class="col s6">
-        <el-input placeholder="Buscar" v-model="buscar" @keyup.enter="busca"></el-input>
-        </div>
-        <el-button @click="busca">Buscar</el-button>
-        </div>
-      </li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
-    <!-- lo que cargo -->
-    <router-view></router-view>
-  </div>
-</template>
-
-<script>
-import axios from 'axios';
-var APIKEY;
-export default {
-  name: 'app',
-  mounted(){
-    axios.get('/dist/api.json').then((respuesta) => {
-          APIKEY = respuesta.data.apikey});
-  },
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App',
-      buscar: ''
-    }
-  },
-  methods:{
-    busca(){
-      var router = this.$router;
-      router.push('/contactos/buscar/'+this.buscar);
-    }
-  }
-}
+<script setup lang="ts">
+import { RouterLink, RouterView } from "vue-router";
 </script>
 
+<template>
+  <header>
+    <nav>
+      <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/contactos">Contacts</RouterLink>
+      <RouterLink to="/contactos/client">Clients</RouterLink>
+      <RouterLink to="/contactos/provider">Provider</RouterLink>
+      <RouterLink to="/about">About</RouterLink>
+    </nav>
+  </header>
+
+  <RouterView />
+</template>
+
 <style>
+@import "@/assets/base.css";
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-img {
-  width: 20px;
-}
-h1, h2 {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   font-weight: normal;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+header {
+  line-height: 1.5;
+  max-height: 100vh;
 }
 
-li {
+.logo {
+  display: block;
+  margin: 0 auto 2rem;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+nav a.router-link-exact-active {
+  color: var(--color-text);
+}
+
+nav a.router-link-exact-active:hover {
+  background-color: transparent;
+}
+
+nav a {
   display: inline-block;
-  margin: 0 10px;
+  padding: 0 1rem;
+  border-left: 1px solid var(--color-border);
 }
 
-a {
-  color: #42b983;
+nav a:first-of-type {
+  border: 0;
+}
+
+nav {
+  text-align: left;
+  margin-left: -1rem;
+  font-size: 1rem;
+
+  padding: 1rem 0;
+  margin-top: 1rem;
+}
+
+header {
+  display: flex;
+  place-items: center;
+}
+
+header .wrapper {
+  display: flex;
+  place-items: flex-start;
+  flex-wrap: wrap;
 }
 </style>
