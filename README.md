@@ -30,7 +30,7 @@ npm run lint
 
 ## Set your env
 
-In your `.env` file set `VITE_API_KEY` with your alegra API key token and `VITE_BASE_URL` with the base URI API. This has been tested with https://app.alegra.com/api/v1/
+In your `.env` file set `VITE_API_KEY` with your alegra API key token and `VITE_API_URL` with the base URI API. This has been tested with https://app.alegra.com/api/v1/
 
 
 ## Recommended IDE Setup
